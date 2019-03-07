@@ -1,8 +1,10 @@
 'use strict';
 
 const WebTorrent = require('webtorrent')
-//Should be in init??
-var client = new WebTorrent()
+
+//
+// Helpers
+//
 
 function throttle (func, wait) {
   var ctx, args, rtn, timeoutID; // caching
@@ -60,94 +62,57 @@ function prettierBytes (num) {
 // Webflix
 //
 
-var Webflix = function(opts) {
-  owner = this;
-  owner.init();
-}
+var Webflix = function() {};
 
 //
 // Webflix prototypes
 //
 
+Webflix.prototype.init = function(torrentId) {
+  this.torrentClient = new WebTorrent();
+  this.torrentId = document.getElementById("wf-torrent") || "";
+}
 
-Webflix.prototype = {
-
-  init: function() {
-    owner.torrentId = document.getElementById("fw-torrent") || "";
-  },
-
-  reset: function() {
-    for (var index in client.torrents) {
-      client.remove(client.torrents[index])
-    }
-    document.querySelectorAll("#wf-app")[0].innerHTML = ""
-    document.querySelectorAll("#wf-peers")[0].innerHtml = ""
-    document.querySelectorAll("#wf-progress-bar")[0].innerHTML = ""
-    document.querySelectorAll("#wf-number-of-peers")[0].innerHTML = ""
-    document.querySelectorAll("#wf-downloaded")[0].innerHTML = ""
-    document.querySelectorAll("#wf-total")[0].innerHTML = ""
-  },
-
-  download: function(magnetId) {
-    if (!magnetId) {
-      return
-    }
-  
-    //Only one torrent at a time... Destroy other torrents
-    Webflix.prototype.reset()
-
-    //Now add the new torrent
-    client.add(magnetId, function(torrent) {
-      var file = torrent.files.find(function(file) {
-        return file.name.endsWith(".mp4")
-      })
-
-      //Utility functions for torrent
-      function onWire (wire) {
-        var newPeer = document.createElement('div');
-        newPeer.innerHTML = wire.remoteAddress || 'Unknown';
-        document.querySelectorAll("#wf-peers")[0].appendChild( newPeer )
-        wire.once('close', function () {
-          newPeer.innerHTML = ""
-        })
-      }
-
-      function onDone () {
-        onProgress()
-      }
-
-      function onProgress () {
-        var percent = Math.round(torrent.progress * 100 * 100) / 100
-        document.querySelectorAll("#wf-progress-bar")[0].style.width = percent + '%'
-        document.querySelectorAll("#wf-number-of-peers")[0].innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers')
-
-        document.querySelectorAll("#wf-downloaded")[0].innerHTML = prettierBytes(torrent.downloaded)
-        document.querySelectorAll("#wf-total")[0].innerHTML = prettierBytes(torrent.length)
-      }
-
-      file.appendTo("#wf-app")
-
-      torrent.on('wire', onWire)
-      torrent.on('done', onDone)
-
-      torrent.on('download', throttle(onProgress, 250))
-      torrent.on('upload', throttle(onProgress, 250))
-      setInterval(onProgress, 5000)
-      onProgress()
-    })
-  },
-
-
-  upload: function(input) {
-    var client = new WebTorrent()
-    client.seed(input, function(){
-      console.log("Seeding torrent!")
-    })
-  },
-
-  convertToMagnet: function(torrentId) {
-    // TODO
+Webflix.prototype.reset = function() {
+  document.getElementById("wf-app").innerHTML = "";
+  document.getElementById("wf-downloaded").innerHTML = "";
+  document.getElementById("wf-number-of-peers").innerHTML = "";
+  document.getElementById("wf-peers").innerHTML = "";
+  document.getElementById("wf-progress-bar").innerHTML = "";
+  document.getElementById("wf-total").innerHTML = "";
+  for (var index in this.torrentClient.torrents) {
+    this.torrentClient.remove(this.torrentClient.torrents[index])
   }
 }
+
+Webflix.prototype.download = function() {
+  if (!this.torrentId) {
+    console.log("Cannot download due to no torrent set.");
+    return
+  }
+
+  // destroy other torrents
+  this.reset();
+
+  // add new torrent
+  client.add(this.torrentId, function(torrent) {
+    var file = torrent.files.find(function(file) {
+      return file.name.endswith(".mp4")
+        || file.name.endswith(".mkv")
+        || file.name.endswith(".mov")
+    })
+  })
+}
+
+Webflix.prototype.upload = function(input) {
+  this.torrentClient.seed(input, function() {
+    console.log("seeding torrent")
+  })
+}
+
+Webflix.prototype.convertToMagnet = function(torrent) {
+  // TODO
+}
+
 
 module.exports = {download: Webflix.prototype.download};

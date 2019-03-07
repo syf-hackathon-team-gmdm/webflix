@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="static/styles.css">
   </head>
   <body>
+    <!-- app video player -->
+    <div class="container-fluid wf-app-player">
+      <div id="wf-peers"></div>
+      <div id="wf-app"></div>
+      <div id="wf-progress-bar"></div>
+      <div id="wf-number-of-peers"></div>
+      <div id="wf-downloaded"></div>
+      <div id="wf-total"></div>
+    </div>
+    <!-- app video player -->
+
     <div class="wf-app container-fluid">
       <div class="wf-app-content horizontal-align vertical-align">
         <!-- app header -->
@@ -15,23 +26,12 @@
         </div>
         <!-- app body -->
         <div class="container-fluid wf-app-media">
-          <form>
-            <p class="link-label noselect">enter movie magnet uri</p>
-            <div id="magnet-link" class="link">
-              <input id="magnet-link-input" class="link-input" type="text" autocomplete="off" placeholder="magnet:?xt=" autofocus>
-            </div>
-            <button id="magnet-link-button" type="button" class="link-submit btn btn-primary btn-lg btn-block">Stream</button>
-            <a href="https://syf-hackathon-team-gmdm.github.io" class="link-example" target="_blank">See an example ›</a>
-          </form>
-        </div>
-        <!-- app footer -->
-        <div class="container-fluid wf-app-footer">
-          <div id="wf-peers"></div>
-          <div id="wf-app"></div>
-          <div id="wf-progress-bar"></div>
-          <div id="wf-number-of-peers"></div>
-          <div id="wf-downloaded"></div>
-          <div id="wf-total"></div>
+          <div id="magnet-link" class="link">
+            <p class="link-label noselect">enter movie magnet link</p>
+            <input id="magnet-link-input" class="link-input" type="text" autocomplete="off" placeholder="magnet:?xt=" autofocus>
+          </div>
+          <button id="magnet-link-button" type="button" class="link-submit btn btn-primary btn-lg btn-block">Stream</button>
+          <a href="https://syf-hackathon-team-gmdm.github.io" class="link-example" target="_blank">See an example ›</a>
         </div>
       </div>
     </div>
