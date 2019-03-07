@@ -1,2 +1,3 @@
 # webflix
-Watch movies right from your extensions!
+
+![](./assets/logo.png)
