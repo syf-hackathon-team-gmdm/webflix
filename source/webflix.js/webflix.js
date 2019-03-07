@@ -101,6 +101,7 @@ Webflix.prototype.download = function() {
       return file.name.endsWith(".mp4")
         || file.name.endsWith(".mkv")
         || file.name.endsWith(".mov")
+        || file.name.endsWith(".webm")
     })
 
     //Utility functions for torrent
