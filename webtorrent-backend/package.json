@@ -1,0 +1,24 @@
+{
+  "name": "webflix",
+  "version": "1.0.0",
+  "description": "Backend for browser extensions to extend webtorrent capabilities",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "webtorrent": "^0.103.0"
+  },
+  "main": "",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/thekensman/webflix.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/thekensman/webflix/issues"
+  },
+  "homepage": "https://github.com/thekensman/webflix#README"
+}
