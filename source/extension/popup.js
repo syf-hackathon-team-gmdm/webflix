@@ -1,9 +1,8 @@
 const button = document.getElementById("magnet-link-button");
-const input = document.getElementById("magnet-link-input");
+const input = document.getElementById("wf-torrent");
 
 button.addEventListener("click", function() {
-  var torrentId = document.getElementById("wf-torrent").value || "";
-  //input.value || "";
+  var torrentId = input.value || "";
   if (!torrentId) {
     // add shake effect
     input.classList.add("shake");
