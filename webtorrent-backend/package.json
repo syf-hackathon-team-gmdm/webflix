@@ -1,8 +1,8 @@
 {
-  "name": "webflix",
+  "name": "webflix.js",
   "version": "1.0.0",
-  "description": "Backend for browser extensions to extend webtorrent capabilities",
-  "author": "",
+  "description": "Server-less Netflix on the web using webtorrent technology",
+  "author": "GMDM",
   "license": "MIT",
   "dependencies": {
     "browserify": "^16.2.3",
@@ -15,11 +15,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/thekensman/webflix.git"
+    "url": "git+https://github.com/syf-hackathon-team-gmdm/webflix.js"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/thekensman/webflix/issues"
+    "url": "https://github.com/syf-hackathon-team-gmdm/webflix.js"
   },
-  "homepage": "https://github.com/thekensman/webflix#README"
+  "homepage": "https://github.com/syf-hackathon-team-gmdm/webflix.js#README"
 }
