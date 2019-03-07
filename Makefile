@@ -18,6 +18,7 @@ NODE_BIN  ?= $(NODE_MODS)/.bin
 # source
 #
 
+SOURCE_EXTENSION   ?= $(SOURCE)/extension
 SOURCE_CHROME      ?= $(SOURCE)/chrome-extension
 SOURCE_FIREFOX     ?= $(SOURCE)/firefox-extension
 SOURCE_WEBFLIX_CSS ?= $(SOURCE)/webflix.css
@@ -32,7 +33,7 @@ BUILD_FIREFOX ?= $(BUILD)/firefox-extension
 BUILD_WEBFLIX ?= $(BUILD)/webflix
 
 
-all: build
+all: deps build
 
 deps:
 	$(NODE_NPM) install browserify sass webtorrent 2>/dev/null || true
@@ -42,10 +43,14 @@ build: webflix.css webflix.js chrome firefox
 chrome: webflix.css webflix.js
 	@mkdir -p $(BUILD_CHROME)/static
 	@cp $(BUILD_WEBFLIX)/* $(BUILD_CHROME)/static
+	@cp -r $(SOURCE_EXTENSION)/* $(BUILD_CHROME)
 	@cp -r $(SOURCE_CHROME)/* $(BUILD_CHROME)
 
 firefox: webflix.css webflix.js
-	@mkdir -p $(BUILD_FIREFOX)
+	@mkdir -p $(BUILD_FIREFOX)/static
+	@cp $(BUILD_WEBFLIX)/* $(BUILD_FIREFOX)/static
+	@cp -r $(SOURCE_EXTENSION)/* $(BUILD_FIREFOX)
+	@cp -r $(SOURCE_FIREFOX)/* $(BUILD_FIREFOX)
 
 webflix.css:
 	@mkdir -p $(BUILD_WEBFLIX)
@@ -54,7 +59,7 @@ webflix.css:
 
 webflix.js:
 	@mkdir -p $(BUILD_WEBFLIX)
-	$(NODE_BIN)/browserify $(SOURCE_WEBFLIX_JS)/webflix.js -o $(BUILD_WEBFLIX)/bundle.js
+	$(NODE_BIN)/browserify $(SOURCE_WEBFLIX_JS)/webflix.js --s webflix -o $(BUILD_WEBFLIX)/bundle.js
 
 clean:
 	@rm -rf $(NODE_MODS)

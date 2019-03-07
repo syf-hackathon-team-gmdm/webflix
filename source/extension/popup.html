@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400|Staatliches">
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="static/bundle.js"></script>
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <div class="wf-app container-fluid">
+      <div class="wf-app-content horizontal-align vertical-align">
+        <!-- app header -->
+        <div class="container-fluid wf-app-header">
+          <h1 class="wf-app-title">Webflix</h1>
+          <p class="wf-app-desc">Stream and watch movies without servers.</p>
+        </div>
+        <!-- app body -->
+        <div class="container-fluid wf-app-media">
+          <form>
+            <p class="link-label noselect">enter movie magnet uri</p>
+            <div id="magnet-link" class="link">
+              <input id="magnet-link-input" class="link-input" type="text" autocomplete="off" placeholder="magnet:?xt=" autofocus>
+            </div>
+            <button id="magnet-link-button" type="button" class="link-submit btn btn-primary btn-lg btn-block">Stream</button>
+            <a href="https://syf-hackathon-team-gmdm.github.io" class="link-example" target="_blank">See an example ›</a>
+          </form>
+        </div>
+        <div id="wf-peers"></div>
+        <div id="wf-app"></div>
+        <div id="wf-progress-bar"></div>
+        <div id="wf-number-of-peers"></div>
+        <div id="wf-downloaded"></div>
+        <div id="wf-total"></div>
+      </div>
+    </div>
+  </body>
+</html>
