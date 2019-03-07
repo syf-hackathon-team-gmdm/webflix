@@ -2,6 +2,10 @@
 
 # webflix
 
+## Sample
+
+> magnet:?xt=urn:btih:BCW2LJ5GDA5K4HQJ3AY56Z2I2VTASWQQ&dn=Sintel&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969
+
 ## Dependencies
 
 ```bash
