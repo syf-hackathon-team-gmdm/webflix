@@ -1,2 +1,8 @@
-http://browserify.org/#install
-browserify test.js -o bundle.js
+# backend
+
+## Build
+
+```
+~$ # http://browserify.org/#install
+~$ browserify webflix.js -o bundle.js
+```
