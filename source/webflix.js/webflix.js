@@ -80,12 +80,12 @@ Webflix.prototype = {
     for (var index in client.torrents) {
       client.remove(client.torrents[index])
     }
-    document.querySelector("#wf-app").innerHTML = ""
-    document.querySelector("#wf-peers").innerHtml = ""
-    document.querySelector("#wf-progress-bar").innerHTML = ""
-    document.querySelector("#wf-number-of-peers").innerHTML = ""
-    document.querySelector("#wf-downloaded").innerHTML = ""
-    document.querySelector("#wf-total").innerHTML = ""
+    document.querySelectorAll("#wf-app")[0].innerHTML = ""
+    document.querySelectorAll("#wf-peers")[0].innerHtml = ""
+    document.querySelectorAll("#wf-progress-bar")[0].innerHTML = ""
+    document.querySelectorAll("#wf-number-of-peers")[0].innerHTML = ""
+    document.querySelectorAll("#wf-downloaded")[0].innerHTML = ""
+    document.querySelectorAll("#wf-total")[0].innerHTML = ""
   },
 
   download: function(magnetId) {
@@ -106,7 +106,7 @@ Webflix.prototype = {
       function onWire (wire) {
         var newPeer = document.createElement('div');
         newPeer.innerHTML = wire.remoteAddress || 'Unknown';
-        document.querySelector("#wf-peers").appendChild( newPeer )
+        document.querySelectorAll("#wf-peers")[0].appendChild( newPeer )
         wire.once('close', function () {
           newPeer.innerHTML = ""
         })
@@ -118,11 +118,11 @@ Webflix.prototype = {
 
       function onProgress () {
         var percent = Math.round(torrent.progress * 100 * 100) / 100
-        document.querySelector("#wf-progress-bar").style.width = percent + '%'
-        document.querySelector("#wf-number-of-peers").innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers')
+        document.querySelectorAll("#wf-progress-bar")[0].style.width = percent + '%'
+        document.querySelectorAll("#wf-number-of-peers")[0].innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers')
 
-        document.querySelector("#wf-downloaded").innerHTML = prettierBytes(torrent.downloaded)
-        document.querySelector("#wf-total").innerHTML = prettierBytes(torrent.length)
+        document.querySelectorAll("#wf-downloaded")[0].innerHTML = prettierBytes(torrent.downloaded)
+        document.querySelectorAll("#wf-total")[0].innerHTML = prettierBytes(torrent.length)
       }
 
       file.appendTo("#wf-app")
