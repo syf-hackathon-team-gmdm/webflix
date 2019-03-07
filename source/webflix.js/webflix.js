@@ -58,6 +58,7 @@ function prettierBytes (num) {
   }
 }
 
+
 //
 // Webflix
 //
@@ -70,11 +71,11 @@ var Webflix = function() {};
 
 Webflix.prototype.init = function(torrentId) {
   this.torrentClient = new WebTorrent();
-  this.torrentId = document.getElementById("wf-torrent") || "";
+  this.torrentId = torrentId || document.getElementById("wf-torrent").value || "";
 }
 
 Webflix.prototype.reset = function() {
-  document.getElementById("wf-app").innerHTML = "";
+  document.getElementById("wf-player").innerHTML = "";
   document.getElementById("wf-downloaded").innerHTML = "";
   document.getElementById("wf-number-of-peers").innerHTML = "";
   document.getElementById("wf-peers").innerHTML = "";
@@ -95,12 +96,46 @@ Webflix.prototype.download = function() {
   this.reset();
 
   // add new torrent
-  client.add(this.torrentId, function(torrent) {
+  this.torrentClient.add(this.torrentId, function(torrent) {
     var file = torrent.files.find(function(file) {
-      return file.name.endswith(".mp4")
-        || file.name.endswith(".mkv")
-        || file.name.endswith(".mov")
+      return file.name.endsWith(".mp4")
+        || file.name.endsWith(".mkv")
+        || file.name.endsWith(".mov")
     })
+
+    //Utility functions for torrent
+    function onWire (wire) {
+      var newPeer = document.createElement('div');
+      newPeer.innerHTML = wire.remoteAddress || 'Unknown';
+      document.querySelectorAll("#wf-peers")[0].appendChild( newPeer )
+      wire.once('close', function () {
+        newPeer.innerHTML = ""
+      })
+    }
+
+    function onDone () {
+      onProgress()
+    }
+
+    function onProgress () {
+      var percent = Math.round(torrent.progress * 100 * 100) / 100
+      document.getElementById("wf-progress-bar").style.width = percent + '%'
+      document.getElementById("wf-number-of-peers").innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers')
+
+      document.getElementById("wf-downloaded").innerHTML = prettierBytes(torrent.downloaded)
+      document.getElementById("wf-total").innerHTML = prettierBytes(torrent.length)
+    }
+    document.getElementById("wf-app").style.display = "block"
+    file.appendTo("#wf-player")
+
+    torrent.on('wire', onWire)
+    torrent.on('done', onDone)
+
+    torrent.on('download', throttle(onProgress, 250))
+    torrent.on('upload', throttle(onProgress, 250))
+    setInterval(onProgress, 5000)
+    onProgress()
+
   })
 }
 
@@ -115,4 +150,4 @@ Webflix.prototype.convertToMagnet = function(torrent) {
 }
 
 
-module.exports = {download: Webflix.prototype.download};
+module.exports = {download: Webflix.prototype.download, init: Webflix.prototype.init, reset: Webflix.prototype.reset};
