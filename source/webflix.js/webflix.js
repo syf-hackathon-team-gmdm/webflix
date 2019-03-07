@@ -2,14 +2,19 @@
 
 const WebTorrent = require('webtorrent')
 
-/**
- * Webflix
- */
+
+//
+// Webflix
+//
 
 var Webflix = function(opts) {
   owner = this;
   owner.init();
 }
+
+//
+// Webflix prototypes
+//
 
 Webflix.prototype = {
 

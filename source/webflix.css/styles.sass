@@ -1,10 +1,135 @@
+$title-fonts: "Staatliches", serif
+$text-fonts: "Roboto", serif
+
+$red-netflix: #E50914
+$white: #fff
+
+
+//
+// Global overrides
+//
+
 html,
 body
-  background-color: #fafafa
+  background-color: $white
   font-family: Arial, serif
   margin: 0
   padding: 0
 
+html
+  max-height: 768px
+  max-width: 1024px
+  min-height: 480px
+  min-width: 640px
+
 body
-  min-height: 280px
-  min-width: 320px
+  font-family: $text-fonts
+  font-size: 14px
+
+//
+// Bootstrap overrides
+//
+
+a:hover
+  text-decoration: none !important
+
+.container-fluid
+  margin: 0px
+  padding: 0px
+
+//
+// Alignments
+//
+
+.horizontal-align
+  display: block
+  margin: 0 auto
+
+.vertical-align
+  position: relative
+  top: 50%
+  transform: perspective(1px) translateY(-50%)
+
+//
+// Link button effect:
+//
+// +-- link --+ <-- .link-label
+// |          | <-- .link-input
+// +----------+
+//
+// < SUBMIT >   <-- .link-submit
+//
+
+.noselect
+  user-select: none
+
+.link-container
+
+.link-label
+  background: $white
+  bottom: 130px
+  font-size: 12px
+  left: 0
+  margin: 3px auto
+  position: absolute
+  right: 0
+  text-align: center
+  text-transform: uppercase
+  width: 170px
+
+.link-input
+  border-radius: 4px
+  border: 1px solid #00000F
+  box-sizing: border-box
+  height: 47px
+  outline: 0
+  padding: 2px 10px 0
+  width: 100%
+
+.link-submit
+  background-color: $red-netflix !important
+  border-color: transparent !important
+  border-radius: 25px
+  font-size: 14px
+  font-weight: bold
+  margin-top: 15px
+  margin-bottom: 20px
+  text-transform: uppercase
+  transition: all .2s ease
+
+.link-example:hover,
+.link-submit:hover
+  opacity: 0.82
+
+.link-example
+  color: $red-netflix !important
+  font-weight: bold
+
+//
+// Webflix app
+//
+
+.wf-app
+  height: 100vh
+  text-align: center
+  width: 100vw
+
+.wf-app-content
+  max-width: 320px
+
+.wf-app-media
+
+.wf-app-header
+
+.wf-app-title
+  font-family: $title-fonts
+  font-size: 5.75rem
+  vertical-align: text-bottom
+  margin-bottom: 0
+
+.wf-app-desc
+  font-family: $text-fonts
+  font-size: 10.5pt
+  letter-spacing: -0.1pt
+  margin-top: -9pt
+  margin-bottom: 35px
