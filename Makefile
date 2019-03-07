@@ -37,6 +37,9 @@ chrome:
 firefox:
 	@mkdir -p $(EXT_FIREFOX)
 
+webflix.css:
+	true
+
 webflix.js:
 	@mkdir -p $(WEBFLIX_JS)
 	$(NODE_BIN)/browserify $(SOURCE_WEBFLIX)/webflix.js -o $(WEBFLIX_JS)/bundle.js

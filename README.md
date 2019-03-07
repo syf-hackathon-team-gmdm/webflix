@@ -1,25 +1,20 @@
-# webflix
-
 ![](./.gitlab/logo.png)
+
+# webflix
 
 ## Build
 
-### **webflix.js** (backend)
+1. Build **webflix.js** and **webflix.css** library:
 
 ```
-~$ make library  # ./build/webflix.js
+~$ make webflix.css  # ./build
+~$ make webflix.js   # ./build
 ```
 
-### Mozilla Firefox extension
+2. Build browser extension:
 
 ```
-~$ make firefox  # ./build/firefox
-```
-
-### Google Chrome extension
-
-```
-~$ make chrome  # ./build/chrome
+~$ make chrome && make firefox  # ./build
 ```
 
 ## License
