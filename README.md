@@ -4,6 +4,13 @@
   <strong>Webflix</strong>
 </p>
 
+## Demo
+
+<p align="center">
+  <img src="./.github/landing.png">
+  <img src="./.github/stream.png">
+</p>
+
 ## Dependencies
 
 ```bash
