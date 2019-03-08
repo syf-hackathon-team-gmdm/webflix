@@ -5,7 +5,7 @@ $red-netflix: #E50914
 $white: #fff
 
 $app-height: 480px
-$app-width: 640px
+$app-width: 800px
 
 
 //
@@ -156,10 +156,15 @@ a:hover
   display: none
 
 #wf-app-top
+  width: 100%
+  height: 80%
   background: black
 
 #wf-app-bottom
+  width: 100%
+  height: 20%
   background: white
+  overflow-y: scroll
 
 #wf-peers
   display: none
@@ -169,6 +174,11 @@ a:hover
   width: 0%
   background-color: $red-netflix
   display: block
+  vertical-align: top
+
+video
+  width: 100%
+  float: left
 
 //
 // Shake animation
