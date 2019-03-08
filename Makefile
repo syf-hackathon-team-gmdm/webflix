@@ -11,7 +11,7 @@ BUILD   ?= $(PROJECT)/build
 #
 
 NODE_NPM  ?= $(shell which npm)
-NODE_MODS ?= $(PROJECT)/source/webflix.js/node_modules
+NODE_MODS ?= $(PROJECT)/node_modules
 NODE_BIN  ?= $(NODE_MODS)/.bin
 
 #
