@@ -1,4 +1,4 @@
-![](./.gitlab/logo.png)
+![](./source/extension/assets/64.png)
 
 # webflix
 
