@@ -127,7 +127,7 @@ Webflix.prototype.download = function() {
       var percent = Math.round(torrent.progress * 100 * 100) / 100
       webflix.progress_bar.width(percent + "%")
 
-      $("#wf-peers-heading").text("Number of Peers: " + torrent.numPeers)
+      $("#wf-peers-heading").text("View peers › (" + torrent.numPeers + ")")
 
       webflix.downloaded.text(prettierBytes(torrent.downloaded) + " of " + prettierBytes(torrent.length))
     }
@@ -142,8 +142,7 @@ Webflix.prototype.download = function() {
       $("#wf-peers").toggle()
       //css("display", "inline-block")
     })
-    number_of_peers_heading.text("Number of Peers: 0")
-
+    number_of_peers_heading.text("View peers › (0)")
 
     torrent.on('wire', onWire)
     torrent.on('done', onDone)
