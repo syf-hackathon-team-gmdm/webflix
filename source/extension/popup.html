@@ -8,12 +8,16 @@
   <body>
     <!-- app video player -->
     <div id="wf-app" class="container-fluid wf-app-player">
-      <div id="wf-peers"></div>
-      <div id="wf-player"></div>
-      <div id="wf-progress-bar"></div>
-      <div id="wf-number-of-peers"></div>
-      <div id="wf-downloaded"></div>
-      <div id="wf-total"></div>
+      <div id="wf-app-top">
+        <div id="wf-player"></div>
+        <div id="wf-progress-bar"></div>
+      </div>
+      <div id="wf-app-bottom">
+        <div id="wf-downloaded"></div>
+        <div id="wf-number-of-peers">
+          <div id="wf-peers"></div>
+        </div>
+      </div>
     </div>
     <!-- app video player -->
 
@@ -35,6 +39,8 @@
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="static/bundle.js"></script>
     <script src="popup.js"></script>
   </body>

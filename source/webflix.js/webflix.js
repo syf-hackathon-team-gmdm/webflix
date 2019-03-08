@@ -1,6 +1,7 @@
 'use strict';
 
 const WebTorrent = require('webtorrent')
+var $ = require('jquery')
 
 //
 // Helpers
@@ -72,18 +73,22 @@ var Webflix = function() {};
 Webflix.prototype.init = function(torrentId) {
   this.torrentClient = new WebTorrent();
   this.torrentId = torrentId || document.getElementById("wf-torrent").value || "";
+
+  this.app = $("#wf-app")
+  this.player = $("#wf-player")
+  this.downloaded = $("#wf-downloaded")
+  this.number_of_peers = $("#wf-number-of-peers")
+  this.progress_bar = $("#wf-progress-bar")
 }
 
 Webflix.prototype.reset = function() {
-  document.getElementById("wf-player").innerHTML = "";
-  document.getElementById("wf-downloaded").innerHTML = "";
-  document.getElementById("wf-number-of-peers").innerHTML = "";
-  document.getElementById("wf-peers").innerHTML = "";
-  document.getElementById("wf-progress-bar").innerHTML = "";
-  document.getElementById("wf-total").innerHTML = "";
   for (var index in this.torrentClient.torrents) {
     this.torrentClient.remove(this.torrentClient.torrents[index])
   }
+  this.player.empty()
+  this.downloaded.empty()
+  this.number_of_peers.empty()
+  this.progress_bar.empty()
 }
 
 Webflix.prototype.download = function() {
@@ -106,11 +111,11 @@ Webflix.prototype.download = function() {
 
     //Utility functions for torrent
     function onWire (wire) {
-      var newPeer = document.createElement('div');
-      newPeer.innerHTML = wire.remoteAddress || 'Unknown';
-      document.querySelectorAll("#wf-peers")[0].appendChild( newPeer )
+      var new_peer = $("<div>", {"class": "wf-peer"})
+      new_peer.text(wire.remoteAddress || 'Unknown');
+      $("#wf-peers").append(new_peer)
       wire.once('close', function () {
-        newPeer.innerHTML = ""
+        new_peer.empty()
       })
     }
 
@@ -120,14 +125,25 @@ Webflix.prototype.download = function() {
 
     function onProgress () {
       var percent = Math.round(torrent.progress * 100 * 100) / 100
-      document.getElementById("wf-progress-bar").style.width = percent + '%'
-      document.getElementById("wf-number-of-peers").innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers')
+      webflix.progress_bar.width(percent + "%")
 
-      document.getElementById("wf-downloaded").innerHTML = prettierBytes(torrent.downloaded)
-      document.getElementById("wf-total").innerHTML = prettierBytes(torrent.length)
+      $("#wf-peers-heading").text("Number of Peers: " + torrent.numPeers)
+
+      webflix.downloaded.text(prettierBytes(torrent.downloaded) + " of " + prettierBytes(torrent.length))
     }
-    document.getElementById("wf-app").style.display = "block"
+    webflix.app.css("display", "block")
     file.appendTo("#wf-player")
+    var number_of_peers_heading = $("<h3>", {id: "wf-peers-heading"})
+    number_of_peers_heading.css({"cursor": "pointer", "text-decoration": "underline"})
+    webflix.number_of_peers.append(number_of_peers_heading)
+    var peers = $("<div>", {"id": "wf-peers", "style": "display: none"})
+    webflix.number_of_peers.append(peers)
+    number_of_peers_heading.click(function(){
+      $("#wf-peers").toggle()
+      //css("display", "inline-block")
+    })
+    number_of_peers_heading.text("Number of Peers: 0")
+
 
     torrent.on('wire', onWire)
     torrent.on('done', onDone)
