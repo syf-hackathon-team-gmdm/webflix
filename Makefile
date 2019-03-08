@@ -37,6 +37,7 @@ all: deps build
 
 deps:
 	[ -d $(NODE_MODS) ] || $(NODE_NPM) install --prefix $(PROJECT) browserify sass webtorrent jquery 2>/dev/null
+	@rm -rf $(PROJECT)/etc
 
 build: webflix.css webflix.js chrome firefox
 
@@ -62,5 +63,5 @@ webflix.js:
 	$(NODE_BIN)/browserify $(SOURCE_WEBFLIX_JS)/webflix.js --s webflix -o $(BUILD_WEBFLIX)/bundle.js
 
 clean:
-	@rm -rf $(NODE_MODS)
 	@rm -rf $(BUILD)
+	@rm -rf $(NODE_MODS)
