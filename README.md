@@ -4,6 +4,10 @@
   <strong>Webflix</strong>
 </p>
 
+## Description
+
+Webflix is a peer to peer browser extension that allows users to stream videos WITHOUT a server. Torrenting is often seen as shady and arcane, so by providing a friendly interface on a solid platform we hope to legitimize torrenting as a valid form of sharing media to put control back in the hands of users and re-de-centralize the internet.
+
 ## Demo
 
 <p align="center">
